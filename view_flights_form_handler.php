@@ -128,7 +128,7 @@
                 AND DATE(schedules.time_start) = DATE('$time_start')
                 AND schedules.class = '$class'
             ORDER BY schedules.time_start";
-            $result = mysqli_query($dbc, $query);
+            $result = mysqli_query($koneksi, $query);
 
             
 
@@ -160,7 +160,7 @@
               }
               echo '</table>';
             } else {
-              echo "Tidak ada penerbangan yang tersedia. Error: " . mysqli_error($dbc);
+              echo "Tidak ada penerbangan yang tersedia. Error: " . mysqli_error($koneksi);
            }
 
 				}

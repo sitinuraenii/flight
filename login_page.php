@@ -47,7 +47,7 @@
 		<link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.min.css">
 	</head>
 	<body>
-		<img class="logo" src=""/> 
+  <img class="logo" src="images/irctc.jpg"/>
 		<h1 id="title">
 			IRCTC Airways	</h1>
 		<div>

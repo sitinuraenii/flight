@@ -25,24 +25,23 @@
 <body>
   <h2>Pilih Kursi</h2>
   <div id="seatMap">
-    <?php 
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "penerbangannn";
-    
-    $koneksi = mysqli_connect($host, $username, $password, $database);
-    
-      $query = "SELECT kode_seat, status FROM seats ";
-      $query_status = "SELECT kode_seat, status FROM seats";
+    <?php
+      require_once('Database Connection file/mysqli_connect.php');
+      $selectedSchedulesId = isset($_GET['selectedSchedulesId']) ? $_GET['selectedSchedulesId'] : null;
+      $seatClass = isset($_GET['selectedClass']) ? $_GET['selectedClass'] : null;
+      $seatClassSafe = mysqli_real_escape_string($koneksi, $seatClass);
+      $query_status = "SELECT seats.*
+        FROM seats
+        JOIN aircrafts ON seats.id_aircraft = aircrafts.id
+        JOIN airlines ON aircrafts.id_airline = airlines.id
+        JOIN routes ON routes.id_airline = airlines.id
+        RIGHT JOIN schedules ON schedules.id_routes = routes.id
+        WHERE airlines.id = routes.id_airline
+          AND schedules.id = $selectedSchedulesId
+          AND seats.tipe_kelas = '$seatClassSafe'";
     
       // Contoh data kursi dari database
-      $seats = [
-        ['seatNumber' => '4A', 'status' => 'available'],
-        ['seatNumber' => '4B', 'status' => 'available'],
-        ['seatNumber' => '4C', 'status' => 'available'],
-        // ... tambahkan data kursi lainnya dari database
-      ];
+      $seats = [];
 
       $result = mysqli_query($koneksi, $query_status);
 

@@ -55,7 +55,7 @@
 		<?php
 		echo "<h2>Welcome ".$_SESSION['username']."</h2>";
 		require_once('Database Connection file/mysqli_connect.php');
-		$query="SELECT count(*),id_user FROM users WHERE username=?";
+		$query="SELECT count(*),id_user FROM users WHERE username=? GROUP BY users.id_user";
 		$stmt=mysqli_prepare($dbc,$query);
 		mysqli_stmt_bind_param($stmt,"s",$_SESSION['usernamee']);
 		mysqli_stmt_execute($stmt);
